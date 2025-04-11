@@ -10,7 +10,7 @@
 
     {
       role: "Software Developer",
-      company: "GU Orbits",
+      company: "GU Orbit",
       period: "March 2025 - Present",
       description: "",
       skills: ["C++", "Mojo", "Teamwork"]
