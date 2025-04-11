@@ -16,7 +16,8 @@
     "next": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typography": "^0.16.24"
+    "typography": "^0.16.24",
+    "@heroicons/react": "^2.1.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
