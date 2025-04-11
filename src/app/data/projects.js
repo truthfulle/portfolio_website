@@ -24,7 +24,7 @@ export const projects = [
   },
   {
     title: "Tango with Django",
-    description: "A Django-based web application for dance enthusiasts to connect and share moves.",
+    description: "A hands-on Django course.",
     tags: ["Python", "Django", "HTML", "CSS", "Personal Project"],
     image: "/projects/tango-django.jpg",
     link: "https://github.com/truthfulle/tango_with_django_project"
