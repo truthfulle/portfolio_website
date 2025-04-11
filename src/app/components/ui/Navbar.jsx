@@ -14,8 +14,22 @@ export default function Navbar() {
   
   const [isHovered, setIsHovered] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIfMobile();
+
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
@@ -31,13 +45,19 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, setIsNavbarVisible, setIsNavbarManuallyHidden]);
+  }, [lastScrollY, setIsNavbarVisible, setIsNavbarManuallyHidden, isMobile]);
 
   const handleToggleNavbar = () => {
+    if (isMobile) return;
+    
     const newVisibility = !isNavbarVisible;
     setIsNavbarVisible(newVisibility);
     setIsNavbarManuallyHidden(!newVisibility);
   };
+
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <div className="fixed top-4 left-0 right-0 z-50 px-4 transition-all duration-300">
