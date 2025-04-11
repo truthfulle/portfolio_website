@@ -1,14 +1,17 @@
-import Navbar from './components/navbar';
-import ScrollIndicator from './components/ScrollIndicator';
+import { NavbarProvider } from './components/ui/NavbarContext';
+import Navbar from './components/ui/Navbar';
+import ScrollIndicator from './components/ui/ScrollIndicator';
 import './globals.css';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-gray-900 text-gray-100">
-        <Navbar />
-        <main>{children}</main>
-        <ScrollIndicator/>
+      <body>
+        <NavbarProvider>
+          <Navbar />
+          {children}
+        </NavbarProvider>
+        <ScrollIndicator />
       </body>
     </html>
   );

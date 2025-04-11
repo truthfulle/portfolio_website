@@ -1,15 +1,28 @@
-export const experience = [
+  // data/experience.js
+  export const experiences = [
     {
-      role: "Frontend Developer",
-      company: "Tech Company Inc.",
-      period: "2022 - Present",
-      description: "Developed responsive web applications using React and TypeScript."
+      role: "Incoming Software Development Intern",
+      company: "Array Technologies",
+      period: "Summer 2025",
+      description: "",
+      skills: []
     },
+
     {
-      role: "Computing Science Student",
-      company: "University Name",
-      period: "2020 - 2024",
-      description: "Studied algorithms, data structures, and software engineering principles."
-    }
-    // Add more experience items as needed
-  ]
+      role: "Software Developer",
+      company: "GU Orbits",
+      period: "March 2025 - Present",
+      description: "",
+      skills: ["C++", "Mojo", "Teamwork"]
+    },
+
+    {
+      role: "Social Secretary",
+      company: "Glasgow University Tech Society (GUTS)",
+      period: "April 2025 - April 2026",
+      description: "",
+      skills: ["Event Planning", "Teamwork", "Communication", "Social Media Management"]
+    },
+    
+  ];
+  

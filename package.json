@@ -19,7 +19,11 @@
     "typography": "^0.16.24"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@next/eslint-plugin-next": "^15.3.0",
     "autoprefixer": "^10.4.21",
+    "eslint": "^9.24.0",
+    "eslint-config-next": "^15.3.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.1"
   }

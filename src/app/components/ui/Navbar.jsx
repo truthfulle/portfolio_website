@@ -1,10 +1,17 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from 'react';
+import { useNavbar } from '@/app/components/ui/NavbarContext';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect } from 'react';
 
-const Navbar = () => {
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+export default function Navbar() {
+  const { 
+    isNavbarVisible, 
+    setIsNavbarVisible,
+    isNavbarManuallyHidden,
+    setIsNavbarManuallyHidden
+  } = useNavbar();
+  
   const [isHovered, setIsHovered] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -16,6 +23,7 @@ const Navbar = () => {
         setIsNavbarVisible(false);
       } else if (currentScrollY < lastScrollY || currentScrollY < 100) {
         setIsNavbarVisible(true);
+        setIsNavbarManuallyHidden(false);
       }
       
       setLastScrollY(currentScrollY);
@@ -23,7 +31,13 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, setIsNavbarVisible, setIsNavbarManuallyHidden]);
+
+  const handleToggleNavbar = () => {
+    const newVisibility = !isNavbarVisible;
+    setIsNavbarVisible(newVisibility);
+    setIsNavbarManuallyHidden(!newVisibility);
+  };
 
   return (
     <div className="fixed top-4 left-0 right-0 z-50 px-4 transition-all duration-300">
@@ -31,7 +45,7 @@ const Navbar = () => {
         className={`absolute left-6 top-1/2 -translate-y-1/2 z-50 transition-all ${
           isHovered ? 'opacity-100' : 'opacity-70 hover:opacity-100'
         }`}
-        onClick={() => setIsNavbarVisible(!isNavbarVisible)}
+        onClick={handleToggleNavbar}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         aria-label={isNavbarVisible ? "Hide navigation" : "Show navigation"}
@@ -44,28 +58,25 @@ const Navbar = () => {
           )}
         </div>
       </button>
-
-      <div
-        className={`transition-all duration-500 ease-in-out ${
-          isNavbarVisible
-            ? 'translate-x-0 opacity-100'
-            : '-translate-x-full opacity-0 pointer-events-none'
-        }`}
-      >
+      
+      <div className={`transition-all duration-500 ease-in-out ${
+        isNavbarVisible
+          ? 'translate-x-0 opacity-100'
+          : '-translate-x-full opacity-0 pointer-events-none'
+      }`}>
         <div className="max-w-7xl mx-auto">
           <nav className="bg-gray-800/90 backdrop-blur-lg rounded-full border border-gray-700/80 shadow-xl">
             <div className="flex items-center justify-between h-16 px-8 pl-16">
               <div className="flex items-center group">
-                <span className="text-white text-xl font-medium group-hover:text-indigo-300 transition-colors duration-300">
+                <span className="text-white text-xl font-medium group-hover:text-gray-400 transition-colors duration-300">
                   Jonatan
                 </span>
-                <span className="text-gray-400 text-xl font-medium ml-1.5 group-hover:text-indigo-200 transition-colors duration-300">
+                <span className="text-gray-400 text-xl font-medium ml-1.5 group-hover:text-white transition-colors duration-300">
                   Wiankowski
                 </span>
               </div>
-
               <div className="hidden md:flex items-center space-x-3">
-                {['Home', 'Projects', 'Contact'].map((item) => (
+                {['Home', 'Experience', 'Projects', 'Contact'].map((item) => (
                   <a
                     key={item}
                     href={`#${item.toLowerCase()}`}
@@ -81,6 +92,4 @@ const Navbar = () => {
       </div>
     </div>
   );
-};
-
-export default Navbar;
+}
