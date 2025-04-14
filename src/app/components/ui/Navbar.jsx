@@ -14,21 +14,30 @@ export default function Navbar() {
   
   const [isHovered, setIsHovered] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setIsReady(true);
     };
 
-    checkIfMobile();
+    if (typeof window !== 'undefined') {
+      checkIfMobile();
+      window.addEventListener('resize', checkIfMobile);
+    }
 
-    window.addEventListener('resize', checkIfMobile);
-    return () => window.removeEventListener('resize', checkIfMobile);
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', checkIfMobile);
+      }
+    };
   }, []);
 
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || !isReady) return;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -45,7 +54,7 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, setIsNavbarVisible, setIsNavbarManuallyHidden, isMobile]);
+  }, [lastScrollY, setIsNavbarVisible, setIsNavbarManuallyHidden, isMobile, isReady]);
 
   const handleToggleNavbar = () => {
     if (isMobile) return;
@@ -55,7 +64,7 @@ export default function Navbar() {
     setIsNavbarManuallyHidden(!newVisibility);
   };
 
-  if (isMobile) {
+  if (!isReady || isMobile) {
     return null;
   }
 
