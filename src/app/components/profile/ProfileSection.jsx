@@ -16,7 +16,8 @@ export default function ProfileSection() {
       
       <h1 className="text-4xl font-bold mb-4 text-slate-100">Jonatan Wiankowski</h1>
       <p className="text-indigo-400 mb-8 text-lg">Computing Science Student & Developer</p>
-      
+      <p className="text-red-500 mb-8 text-base">My website isn't fully functioning yet! Contact forms dont work :P</p>
+
       <div className="text-slate-300 mb-8 space-y-4 px-6 text-base">
         <p>I'm an MSci Computing Science student at the University of Glasgow, with a passion for software development and a keen interest in machine learning.</p>
       </div>
